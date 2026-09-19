@@ -19,6 +19,11 @@ class Settings(BaseSettings):
     jwt_algorithm: str = "HS256"
     access_token_expire_minutes: int = 60
 
+    admin_name: str = "Leila"
+    admin_email: str = "leila@salao.com"
+    admin_phone: str = "11999999999"
+    admin_password: str = "leila12345"
+
 
 @lru_cache
 def get_settings() -> Settings:
