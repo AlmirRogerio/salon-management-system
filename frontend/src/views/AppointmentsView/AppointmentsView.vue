@@ -91,6 +91,12 @@ async function confirmReschedule(id) {
 
 <template>
   <AppLayout>
+    <RouterLink
+      to="/dashboard"
+      class="back-link"
+    >
+      ← Voltar para o início
+    </RouterLink>
     <div class="header">
       <h1>Meus agendamentos</h1>
       <RouterLink

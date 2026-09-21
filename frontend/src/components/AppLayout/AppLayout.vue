@@ -32,18 +32,6 @@ function onLogout() {
         </span>
       </RouterLink>
 
-      <nav class="nav">
-        <RouterLink to="/appointments">
-          Meus agendamentos
-        </RouterLink>
-        <RouterLink
-          to="/appointments/new"
-          class="new-appointment"
-        >
-          Agendar horário
-        </RouterLink>
-      </nav>
-
       <div class="topbar-right">
         <div class="user-info">
           <span class="avatar">{{ user?.name?.slice(0, 1) || 'C' }}</span>

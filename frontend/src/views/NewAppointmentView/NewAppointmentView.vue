@@ -140,6 +140,12 @@ async function onSubmit() {
 
 <template>
   <AppLayout>
+    <RouterLink
+      to="/dashboard"
+      class="back-link"
+    >
+      ← Voltar para o início
+    </RouterLink>
     <h1>Novo agendamento</h1>
 
     <p

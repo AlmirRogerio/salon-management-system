@@ -1,3 +1,17 @@
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 0.85rem;
+  color: var(--color-muted);
+  font-size: 0.87rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  color: var(--color-primary);
+}
+
 h1 {
   margin-top: 0;
 }
