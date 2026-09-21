@@ -1,0 +1,14 @@
+.notfound {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.notfound h1 {
+  font-size: 4rem;
+  margin: 0;
+  color: var(--color-primary);
+}

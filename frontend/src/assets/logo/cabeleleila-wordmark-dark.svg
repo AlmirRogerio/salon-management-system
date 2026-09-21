@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 128" role="img" aria-labelledby="title">
+  <title id="title">Cabeleleila Leila Salão de Beleza</title>
+  <g transform="translate(8 16)">
+    <circle cx="44" cy="48" r="42" fill="#EAB8A5"/>
+    <circle cx="44" cy="48" r="35" fill="none" stroke="#F8F4F1" stroke-opacity=".55" stroke-width="1.5"/>
+    <text x="37" y="63" fill="#261E1E" font-family="Georgia, serif" font-size="50" font-weight="700">L</text>
+    <path d="M27 67C38 57 50 57 64 65C55 65 47 68 39 73" fill="none" stroke="#7A354D" stroke-linecap="round" stroke-width="3.5"/>
+    <path d="M58 34C64 31 69 34 68 39C63 39 60 37 58 34Z" fill="#261E1E"/>
+    <text x="104" y="38" fill="#EAB8A5" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="700" letter-spacing="5">CABELELEILA</text>
+    <text x="101" y="82" fill="#FBF5F1" font-family="Georgia, serif" font-size="55" font-weight="700">Leila</text>
+    <path d="M105 96H235" stroke="#EAB8A5" stroke-width="1.5"/>
+    <text x="248" y="100" fill="#C7B5AE" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="2.4">SALÃO DE BELEZA</text>
+  </g>
+</svg>

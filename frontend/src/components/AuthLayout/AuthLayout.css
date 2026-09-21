@@ -1,0 +1,63 @@
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f2e5e0 0%, var(--color-bg) 100%);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2rem;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.auth-mark {
+  width: 86px;
+  height: 86px;
+  display: block;
+  margin: 0 auto 0.45rem;
+}
+
+.brand-name {
+  margin: 0;
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.brand-name span,
+.brand-name strong {
+  display: block;
+}
+
+.brand-name span {
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.brand-name strong {
+  margin-top: 0.1rem;
+  font-family: Georgia, serif;
+  font-size: 1.8rem;
+}
+
+.auth-header h2 {
+  margin: 1rem 0 0;
+  font-size: 1.5rem;
+}
+
+.subtitle {
+  margin: 0.35rem 0 0;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}

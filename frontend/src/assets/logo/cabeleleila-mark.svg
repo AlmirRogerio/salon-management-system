@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-labelledby="title">
+  <title id="title">Monograma Cabeleleila Leila</title>
+  <circle cx="48" cy="48" r="46" fill="#F3EBE6"/>
+  <circle cx="48" cy="48" r="39" fill="none" stroke="#E8DDD7" stroke-width="1.5"/>
+  <text x="42" y="64" fill="#7A354D" font-family="Georgia, serif" font-size="54" font-weight="700">L</text>
+  <path d="M30 68C42 57 55 57 70 66C61 66 51 69 43 75" fill="none" stroke="#EAB8A5" stroke-linecap="round" stroke-width="4"/>
+  <path d="M63 32C70 29 75 33 74 39C68 39 64 36 63 32Z" fill="#7A354D"/>
+  <path d="M59 42C64 35 70 34 74 39" fill="none" stroke="#7A354D" stroke-linecap="round" stroke-width="1.8"/>
+</svg>
