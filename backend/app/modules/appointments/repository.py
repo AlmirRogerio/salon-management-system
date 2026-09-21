@@ -24,6 +24,34 @@ class AppointmentRepository:
             id=appointment_id, customer_id=customer_id
         ).first()
 
+    async def get_by_id(self, appointment_id: int) -> Appointment | None:
+        return await Appointment.get_or_none(id=appointment_id)
+
+    async def get_with_customer(
+        self, appointment_id: int
+    ) -> Appointment | None:
+        return (
+            await Appointment.filter(id=appointment_id)
+            .select_related("customer")
+            .first()
+        )
+
+    async def list_all(
+        self,
+        *,
+        start: datetime | None = None,
+        end: datetime | None = None,
+        statuses: list[str] | None = None,
+    ) -> list[Appointment]:
+        query = Appointment.all().select_related("customer")
+        if start is not None:
+            query = query.filter(scheduled_at__gte=start)
+        if end is not None:
+            query = query.filter(scheduled_at__lte=end)
+        if statuses:
+            query = query.filter(status__in=statuses)
+        return await query.order_by("scheduled_at")
+
     async def list_by_customer(
         self,
         customer_id: int,
@@ -107,6 +135,20 @@ class AppointmentServiceRepository:
         return await AppointmentService.filter(
             appointment_id__in=appointment_ids
         )
+
+    async def get_for_appointment(
+        self, appointment_id: int, service_row_id: int
+    ) -> AppointmentService | None:
+        return await AppointmentService.filter(
+            id=service_row_id, appointment_id=appointment_id
+        ).first()
+
+    async def update_status(
+        self, item: AppointmentService, new_status: str
+    ) -> AppointmentService:
+        item.status = new_status
+        await item.save()
+        return item
 
 
 appointment_service_repository = AppointmentServiceRepository()
