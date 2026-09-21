@@ -39,3 +39,10 @@ const STATUS_LABELS = {
 export function formatStatus(status) {
   return STATUS_LABELS[status] || status
 }
+
+export function todayISODate() {
+  const d = new Date()
+  const month = String(d.getMonth() + 1).padStart(2, '0')
+  const day = String(d.getDate()).padStart(2, '0')
+  return `${d.getFullYear()}-${month}-${day}`
+}

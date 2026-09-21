@@ -8,6 +8,7 @@ import {
   formatDateTime,
   formatDuration,
   formatStatus,
+  todayISODate,
 } from '@/utils/format'
 import AppLayout from '@/components/AppLayout/AppLayout.vue'
 import SlotPicker from '@/components/SlotPicker/SlotPicker.vue'
@@ -18,6 +19,7 @@ const { slots, state: slotsState, load: loadSlots, reset: resetSlots } =
 
 const filters = reactive({ start: '', end: '' })
 const error = ref('')
+const today = todayISODate()
 const expandedId = ref(null)
 const rescheduling = reactive({
   id: null,
@@ -225,6 +227,7 @@ async function confirmReschedule(id) {
               <input
                 v-model="rescheduling.date"
                 type="date"
+                :min="today"
                 @change="loadRescheduleSlots"
               >
             </label>

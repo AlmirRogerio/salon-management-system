@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router'
 import { useAppointmentsStore } from '@/stores/appointments'
 import { useAvailableSlots } from '@/composables/useAvailableSlots'
 import { getApiErrorMessage } from '@/utils/apiError'
-import { formatCurrency, formatDuration, formatDateTime } from '@/utils/format'
+import { formatCurrency, formatDuration, formatDateTime, todayISODate } from '@/utils/format'
 import AppLayout from '@/components/AppLayout/AppLayout.vue'
 import SlotPicker from '@/components/SlotPicker/SlotPicker.vue'
 
@@ -41,6 +41,8 @@ const totalDuration = computed(() =>
 const hasSlotQuery = computed(
   () => Boolean(form.date) && form.serviceIds.length > 0
 )
+
+const today = todayISODate()
 
 onMounted(async () => {
   try {
@@ -210,6 +212,7 @@ async function onSubmit() {
           v-model="form.date"
           type="date"
           class="input"
+          :min="today"
           @change="onDateChange"
         >
         <p

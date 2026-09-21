@@ -1,11 +1,14 @@
 from datetime import date, datetime, time, timedelta
 
 
-def week_bounds(reference: datetime) -> tuple[datetime, datetime]:
+def week_bounds(
+    reference: datetime, not_before: datetime | None = None
+) -> tuple[datetime, datetime]:
     day_start = reference.replace(hour=0, minute=0, second=0, microsecond=0)
     monday = day_start - timedelta(days=reference.weekday())
     sunday_end = monday + timedelta(days=6, hours=23, minutes=59, seconds=59)
-    return monday, sunday_end
+    start = max(monday, not_before) if not_before else monday
+    return start, sunday_end
 
 
 def overlaps_any(

@@ -146,7 +146,10 @@ class AppointmentsService:
         self, customer_id: int, target_date: datetime
     ) -> WeekSuggestionResponse:
         reference = to_naive(target_date)
-        start, end = week_bounds(reference)
+
+        start, end = week_bounds(reference, not_before=to_naive(now()))
+        if start > end:
+            return WeekSuggestionResponse(has_suggestion=False)
         existing = await self._repository.first_in_range(
             customer_id, start, end
         )
