@@ -116,8 +116,18 @@
 }
 
 @media (max-width: 460px) {
+  .topbar {
+    min-height: 62px;
+    padding: 0.7rem 1rem;
+  }
+
   .brand small,
   .user-info {
     display: none;
+  }
+
+  .brand-mark {
+    width: 32px;
+    height: 32px;
   }
 }
