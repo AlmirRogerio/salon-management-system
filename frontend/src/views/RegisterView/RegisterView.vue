@@ -9,6 +9,7 @@ import {
   validatePhone,
   validatePassword,
 } from '@/utils/validators'
+import { formatPhone, onlyDigits } from '@/utils/phone'
 import AuthLayout from '@/components/AuthLayout/AuthLayout.vue'
 import FormField from '@/components/FormField/FormField.vue'
 
@@ -35,7 +36,7 @@ async function onSubmit() {
     await auth.register({
       name: form.name.trim(),
       email: form.email.trim(),
-      phone: form.phone.trim(),
+      phone: onlyDigits(form.phone),
       password: form.password,
     })
     router.push('/dashboard')
@@ -90,6 +91,9 @@ async function onSubmit() {
         type="tel"
         autocomplete="tel"
         placeholder="(11) 99999-9999"
+        inputmode="numeric"
+        maxlength="15"
+        :formatter="formatPhone"
         :error="errors.phone"
         required
       />

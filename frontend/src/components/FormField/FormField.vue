@@ -1,5 +1,5 @@
 <script setup>
-defineProps({
+const props = defineProps({
   id: { type: String, required: true },
   label: { type: String, required: true },
   modelValue: { type: String, default: '' },
@@ -8,9 +8,21 @@ defineProps({
   placeholder: { type: String, default: '' },
   error: { type: String, default: '' },
   required: { type: Boolean, default: false },
+  inputmode: { type: String, default: undefined },
+  maxlength: { type: [String, Number], default: undefined },
+  formatter: { type: Function, default: null },
 })
 
-defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue'])
+
+function onInput(event) {
+  const raw = event.target.value
+  const value = props.formatter ? props.formatter(raw) : raw
+  if (props.formatter && event.target.value !== value) {
+    event.target.value = value
+  }
+  emit('update:modelValue', value)
+}
 </script>
 
 <template>
@@ -23,10 +35,11 @@ defineEmits(['update:modelValue'])
       :autocomplete="autocomplete"
       :placeholder="placeholder"
       :required="required"
+      :inputmode="inputmode"
+      :maxlength="maxlength"
       :aria-invalid="Boolean(error)"
       :aria-describedby="error ? `${id}-error` : undefined"
-      @input="$emit('update:modelValue', $event.target.value)"
-      @blur="$emit('update:modelValue', $event.target.value)"
+      @input="onInput"
     >
     <span
       v-if="error"

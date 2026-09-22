@@ -15,9 +15,11 @@ export function validateEmail(value) {
 }
 
 export function validatePhone(value) {
-  const v = (value || '').trim()
-  if (v.length < 8) return 'Informe um telefone válido (mínimo 8 dígitos).'
-  if (v.length > 30) return 'Telefone muito longo (máximo 30 caracteres).'
+  const digits = (value || '').replace(/\D/g, '')
+  if (!digits) return 'Informe seu telefone.'
+  if (digits.length < 10 || digits.length > 11) {
+    return 'Informe um telefone válido com DDD, ex: (11) 99999-9999.'
+  }
   return ''
 }
 
