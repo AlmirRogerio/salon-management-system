@@ -85,10 +85,18 @@
 }
 
 .nav-icon {
-  width: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
   color: var(--color-admin-accent);
-  text-align: center;
-  font-size: 1rem;
+}
+
+.nav-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .sidebar-footer {
@@ -142,11 +150,39 @@
   flex: 1;
 }
 
+.sidebar-overlay {
+  display: none;
+}
+
+.menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface, #fff);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.menu-toggle:hover {
+  background: var(--color-surface-alt);
+}
+
+.menu-toggle svg {
+  width: 22px;
+  height: 22px;
+}
+
 .topbar {
   min-height: 76px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 1rem;
   padding: 1rem clamp(1.5rem, 4vw, 3rem);
   background: rgba(255, 253, 251, 0.88);
@@ -199,28 +235,48 @@
     display: block;
   }
 
+  .menu-toggle {
+    display: inline-flex;
+  }
+
   .sidebar {
-    position: static;
-    width: 100%;
-    height: auto;
-    min-height: auto;
-    overflow-y: visible;
-    padding: 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 50;
+    width: 260px;
+    max-width: 82vw;
+    height: 100vh;
+    padding: 1.5rem 1rem;
+    transform: translateX(-100%);
+    transition: transform 0.28s ease;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+  }
+
+  .sidebar.is-open {
+    transform: translateX(0);
+  }
+
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    display: block;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.28s ease, visibility 0.28s ease;
+  }
+
+  .sidebar-overlay.is-visible {
+    opacity: 1;
+    visibility: visible;
   }
 
   .nav {
-    display: flex;
-    margin-top: 1.25rem;
-    overflow-x: auto;
-  }
-
-  .nav-label,
-  .sidebar-footer {
-    display: none;
-  }
-
-  .nav a {
-    white-space: nowrap;
+    display: grid;
+    margin-top: 2rem;
+    overflow-x: visible;
   }
 
   .topbar {
