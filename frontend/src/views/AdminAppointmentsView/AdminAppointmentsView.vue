@@ -178,6 +178,12 @@ async function onServiceStatusChange(appt, item, event) {
 const isFinal = (appt) =>
   appt.status === 'completed' || appt.status === 'canceled'
 
+function isServiceOptionDisabled(appt, optionValue, item) {
+  if (optionValue === item.status) return false
+  if (optionValue === 'canceled') return false
+  return appt.status === 'pending'
+}
+
 function startReschedule(appt) {
   rescheduling.id = appt.id
   rescheduling.date = appt.scheduled_at.slice(0, 10)
@@ -361,6 +367,7 @@ async function confirmReschedule(id) {
                     v-for="opt in SERVICE_STATUS_OPTIONS"
                     :key="opt.value"
                     :value="opt.value"
+                    :disabled="isServiceOptionDisabled(appt, opt.value, item)"
                   >
                     {{ opt.label }}
                   </option>

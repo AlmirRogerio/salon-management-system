@@ -333,6 +333,17 @@ class AppointmentsService:
                 detail="Servico do agendamento nao encontrado.",
             )
 
+        if (
+            appointment.status == AppointmentStatus.PENDING
+            and data.status != AppointmentServiceStatus.CANCELED
+        ):
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=(
+                    "Confirme o agendamento antes de atualizar o status dos servicos."
+                ),
+            )
+
         await self._appointment_service_repository.update_status(
             item, data.status
         )
@@ -452,6 +463,8 @@ class AppointmentsService:
         )
         duration_by_appointment: dict[int, int] = {}
         for item in items:
+            if item.status == AppointmentServiceStatus.CANCELED:
+                continue
             duration_by_appointment[item.appointment_id] = (
                 duration_by_appointment.get(item.appointment_id, 0)
                 + item.duration_minutes
