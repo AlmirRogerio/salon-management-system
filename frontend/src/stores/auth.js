@@ -7,6 +7,7 @@ export const useAuthStore = defineStore('auth', {
     user: null,
     token: getToken(),
     loading: false,
+    hydrationPromise: null,
   }),
 
   getters: {
@@ -19,6 +20,16 @@ export const useAuthStore = defineStore('auth', {
       this.token = access_token
       this.user = user
       setToken(access_token)
+    },
+
+    ensureHydrated() {
+      if (this.user || !this.token) return Promise.resolve()
+      if (!this.hydrationPromise) {
+        this.hydrationPromise = this.fetchCurrentUser().finally(() => {
+          this.hydrationPromise = null
+        })
+      }
+      return this.hydrationPromise
     },
 
     async register(payload) {

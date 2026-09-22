@@ -25,7 +25,7 @@ async function bootstrap() {
   })
 
   if (auth.isAuthenticated) {
-    await auth.fetchCurrentUser()
+    await auth.ensureHydrated()
   }
 
   app.mount('#app')
