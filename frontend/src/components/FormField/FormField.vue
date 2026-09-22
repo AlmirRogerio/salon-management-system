@@ -1,4 +1,6 @@
 <script setup>
+import { computed, ref } from 'vue'
+
 const props = defineProps({
   id: { type: String, required: true },
   label: { type: String, required: true },
@@ -15,6 +17,14 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue'])
 
+const isPassword = computed(() => props.type === 'password')
+const showPassword = ref(false)
+
+const inputType = computed(() => {
+  if (!isPassword.value) return props.type
+  return showPassword.value ? 'text' : 'password'
+})
+
 function onInput(event) {
   const raw = event.target.value
   const value = props.formatter ? props.formatter(raw) : raw
@@ -23,24 +33,43 @@ function onInput(event) {
   }
   emit('update:modelValue', value)
 }
+
+function togglePassword() {
+  showPassword.value = !showPassword.value
+}
 </script>
 
 <template>
   <div class="field">
     <label :for="id">{{ label }}</label>
-    <input
-      :id="id"
-      :type="type"
-      :value="modelValue"
-      :autocomplete="autocomplete"
-      :placeholder="placeholder"
-      :required="required"
-      :inputmode="inputmode"
-      :maxlength="maxlength"
-      :aria-invalid="Boolean(error)"
-      :aria-describedby="error ? `${id}-error` : undefined"
-      @input="onInput"
+    <div
+      class="control"
+      :class="{ 'has-toggle': isPassword }"
     >
+      <input
+        :id="id"
+        :type="inputType"
+        :value="modelValue"
+        :autocomplete="autocomplete"
+        :placeholder="placeholder"
+        :required="required"
+        :inputmode="inputmode"
+        :maxlength="maxlength"
+        :aria-invalid="Boolean(error)"
+        :aria-describedby="error ? `${id}-error` : undefined"
+        @input="onInput"
+      >
+      <button
+        v-if="isPassword"
+        type="button"
+        class="toggle"
+        :aria-label="showPassword ? 'Ocultar senha' : 'Mostrar senha'"
+        :aria-pressed="showPassword"
+        @click="togglePassword"
+      >
+        {{ showPassword ? 'Ocultar' : 'Mostrar' }}
+      </button>
+    </div>
     <span
       v-if="error"
       :id="`${id}-error`"
