@@ -1,0 +1,109 @@
+.dialog-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+  background: rgba(38, 30, 30, 0.28);
+}
+
+.dialog {
+  width: min(100%, 440px);
+  padding: 1.65rem 1.75rem 1.4rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.dialog-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.dialog-message {
+  margin: 0 0 1.4rem;
+  color: var(--color-muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.55rem;
+}
+
+.dialog-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.dialog-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.dialog-btn.primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.dialog-btn.primary:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+}
+
+.dialog-btn.danger {
+  background: transparent;
+  border-color: var(--color-error);
+  color: var(--color-error);
+}
+
+.dialog-btn.danger:hover:not(:disabled) {
+  background: var(--color-error-bg);
+}
+
+.dialog-btn.ghost {
+  background: transparent;
+  color: var(--color-muted);
+}
+
+.dialog-btn.ghost:hover:not(:disabled) {
+  color: var(--color-text);
+}
+
+.dialog-enter-active,
+.dialog-leave-active {
+  transition: opacity 0.14s ease;
+}
+
+.dialog-enter-active .dialog,
+.dialog-leave-active .dialog {
+  transition: transform 0.14s ease;
+}
+
+.dialog-enter-from,
+.dialog-leave-to {
+  opacity: 0;
+}
+
+.dialog-enter-from .dialog,
+.dialog-leave-to .dialog {
+  transform: translateY(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dialog-enter-active,
+  .dialog-leave-active,
+  .dialog-enter-active .dialog,
+  .dialog-leave-active .dialog {
+    transition: none;
+  }
+}

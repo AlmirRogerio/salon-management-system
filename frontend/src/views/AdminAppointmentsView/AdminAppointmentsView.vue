@@ -11,6 +11,7 @@ import {
 } from '@/utils/format'
 import AdminLayout from '@/components/AdminLayout/AdminLayout.vue'
 import SlotPicker from '@/components/SlotPicker/SlotPicker.vue'
+import ConfirmDialog from '@/components/ConfirmDialog/ConfirmDialog.vue'
 
 const store = useAdminAppointmentsStore()
 const { slots, state: slotsState, load: loadSlots, reset: resetSlots } =
@@ -34,6 +35,44 @@ const filters = reactive({ start: '', end: '', status: '' })
 const error = ref('')
 const success = ref('')
 const expandedId = ref(null)
+
+const dialog = reactive({
+  open: false,
+  title: '',
+  message: '',
+  confirmLabel: 'Confirmar',
+  variant: 'primary',
+  busy: false,
+  action: null,
+})
+
+function openDialog({ title, message, confirmLabel, variant, action }) {
+  dialog.title = title
+  dialog.message = message
+  dialog.confirmLabel = confirmLabel ?? 'Confirmar'
+  dialog.variant = variant ?? 'primary'
+  dialog.action = action
+  dialog.busy = false
+  dialog.open = true
+}
+
+function closeDialog() {
+  if (dialog.busy) return
+  dialog.open = false
+  dialog.action = null
+}
+
+async function runDialogAction() {
+  if (!dialog.action) return
+  dialog.busy = true
+  try {
+    await dialog.action()
+    dialog.open = false
+    dialog.action = null
+  } finally {
+    dialog.busy = false
+  }
+}
 
 const rescheduling = reactive({
   id: null,
@@ -86,25 +125,43 @@ async function onConfirm(appt) {
   }
 }
 
-async function onCancel(appt) {
-  error.value = ''
-  if (!window.confirm('Deseja realmente cancelar este agendamento?')) return
-  try {
-    await store.cancel(appt.id)
-    flashSuccess('Agendamento cancelado.')
-  } catch (err) {
-    error.value = getApiErrorMessage(err, 'Não foi possível cancelar.')
-  }
+function onCancel(appt) {
+  openDialog({
+    title: 'Cancelar agendamento',
+    message: 'Deseja realmente cancelar este agendamento? Esta ação não pode ser desfeita.',
+    confirmLabel: 'Cancelar agendamento',
+    variant: 'danger',
+    action: async () => {
+      error.value = ''
+      try {
+        await store.cancel(appt.id)
+        flashSuccess('Agendamento cancelado.')
+      } catch (err) {
+        error.value = getApiErrorMessage(err, 'Não foi possível cancelar.')
+      }
+    },
+  })
 }
 
-async function onComplete(appt) {
-  error.value = ''
-  try {
-    await store.complete(appt.id)
-    flashSuccess('Agendamento concluído.')
-  } catch (err) {
-    error.value = getApiErrorMessage(err, 'Não foi possível concluir.')
-  }
+function onComplete(appt) {
+  const isFuture = new Date(appt.scheduled_at).getTime() > Date.now()
+  openDialog({
+    title: 'Concluir agendamento',
+    message: isFuture
+      ? 'Este agendamento está marcado para uma data futura. Ao concluir agora, o horário será remarcado para o intervalo disponível anterior mais próximo do momento atual, dentro do horário de funcionamento. Deseja continuar?'
+      : 'Deseja concluir este agendamento?',
+    confirmLabel: 'Concluir',
+    variant: 'primary',
+    action: async () => {
+      error.value = ''
+      try {
+        await store.complete(appt.id)
+        flashSuccess('Agendamento concluído.')
+      } catch (err) {
+        error.value = getApiErrorMessage(err, 'Não foi possível concluir.')
+      }
+    },
+  })
 }
 
 async function onServiceStatusChange(appt, item, event) {
@@ -405,6 +462,17 @@ async function confirmReschedule(id) {
         </div>
       </li>
     </ul>
+
+    <ConfirmDialog
+      :open="dialog.open"
+      :title="dialog.title"
+      :message="dialog.message"
+      :confirm-label="dialog.confirmLabel"
+      :variant="dialog.variant"
+      :busy="dialog.busy"
+      @confirm="runDialogAction"
+      @cancel="closeDialog"
+    />
   </AdminLayout>
 </template>
 
