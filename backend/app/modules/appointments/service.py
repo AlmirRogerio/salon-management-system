@@ -15,6 +15,7 @@ from app.modules.services.repository import (
 )
 from app.utils import (
     combine_date_time,
+    floor_to_slot,
     now,
     overlaps_any,
     to_naive,
@@ -268,6 +269,10 @@ class AppointmentsService:
 
         self._ensure_not_final(appointment, "concluir")
 
+        current = to_naive(now())
+        if to_naive(appointment.scheduled_at) > current:
+            appointment.scheduled_at = await self._nearest_past_slot(current)
+
         appointment.status = AppointmentStatus.COMPLETED
         await appointment.save()
 
@@ -372,6 +377,19 @@ class AppointmentsService:
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail=detail,
             )
+
+    async def _nearest_past_slot(self, moment: datetime) -> datetime:
+        hours = await self._business_hours_repository.get_by_weekday(
+            moment.weekday()
+        )
+        if hours is None or not hours.is_open:
+            return moment
+        return floor_to_slot(
+            moment,
+            hours.open_time,
+            hours.close_time,
+            hours.slot_interval_minutes,
+        )
 
     async def _build_admin_response(
         self, appointment: Appointment

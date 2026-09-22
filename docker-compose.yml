@@ -29,6 +29,7 @@ services:
     environment:
       APP_NAME: "Salon Management System"
       DEBUG: "true"
+      TIMEZONE: "America/Sao_Paulo"
       DATABASE_URL: "mysql://salon:salon@db:3306/salon"
       JWT_SECRET_KEY: "troque-esta-chave-em-producao"
       JWT_ALGORITHM: "HS256"

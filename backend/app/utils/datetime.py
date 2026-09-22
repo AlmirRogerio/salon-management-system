@@ -1,8 +1,13 @@
 from datetime import datetime
+from zoneinfo import ZoneInfo
+
+from app.core.config import settings
+
+_tz = ZoneInfo(settings.timezone)
 
 
 def now() -> datetime:
-    return datetime.now()
+    return datetime.now(_tz).replace(tzinfo=None)
 
 
 def to_naive(value: datetime) -> datetime:

@@ -31,3 +31,19 @@ def combine_date_time(day: date, value: time | timedelta) -> datetime:
         minutes=value.minute,
         seconds=value.second,
     )
+
+
+def floor_to_slot(
+    moment: datetime,
+    open_time: time,
+    close_time: time,
+    interval_minutes: int,
+) -> datetime:
+    day_open = combine_date_time(moment.date(), open_time)
+    day_close = combine_date_time(moment.date(), close_time)
+    target = min(moment, day_close)
+    if target <= day_open:
+        return day_open
+    step = timedelta(minutes=interval_minutes)
+    steps = (target - day_open) // step
+    return day_open + steps * step

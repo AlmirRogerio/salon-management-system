@@ -13,6 +13,8 @@ class Settings(BaseSettings):
     app_name: str = "Salon Management System"
     debug: bool = False
 
+    timezone: str = "America/Sao_Paulo"
+
     database_url: str = "mysql://salon:salon@db:3306/salon"
 
     jwt_secret_key: str = "change-me-in-production"
