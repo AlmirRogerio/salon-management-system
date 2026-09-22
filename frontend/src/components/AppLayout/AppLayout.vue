@@ -2,7 +2,6 @@
 import { computed } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
-import brandSeal from '@/assets/logo/cabeleleila-mark-light.svg'
 
 const router = useRouter()
 const auth = useAuthStore()
@@ -21,11 +20,6 @@ function onLogout() {
         to="/dashboard"
         class="brand"
       >
-        <img
-          class="brand-mark"
-          :src="brandSeal"
-          alt=""
-        >
         <span>
           <strong>Cabeleleila</strong>
           <small>Salão da Leila</small>

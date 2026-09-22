@@ -25,16 +25,6 @@
   text-decoration: none;
 }
 
-.brand-mark {
-  width: 36px;
-  height: 36px;
-  display: block;
-  flex: 0 0 auto;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: var(--shadow-sm);
-}
-
 .brand strong,
 .brand small {
   display: block;
@@ -124,10 +114,5 @@
   .brand small,
   .user-info {
     display: none;
-  }
-
-  .brand-mark {
-    width: 32px;
-    height: 32px;
   }
 }

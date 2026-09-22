@@ -55,8 +55,8 @@ h1 {
 .hero-logo {
   position: relative;
   z-index: 1;
-  width: clamp(112px, 15vw, 154px);
-  height: clamp(112px, 15vw, 154px);
+  width: clamp(150px, 18vw, 210px);
+  height: auto;
   flex: 0 0 auto;
 }
 

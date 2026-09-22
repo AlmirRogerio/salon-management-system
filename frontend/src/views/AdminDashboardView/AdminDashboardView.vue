@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink } from 'vue-router'
-import brandLogoDark from '@/assets/logo/cabeleleila-mark-dark.svg'
+import brandLogoDark from '@/assets/logo/cabeleleila-leila-logo-clara.svg'
 import AdminLayout from '@/components/AdminLayout/AdminLayout.vue'
 </script>
 

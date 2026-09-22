@@ -54,18 +54,15 @@ h1 {
 }
 
 .hero-detail {
-  width: 170px;
-  height: 170px;
+  width: clamp(150px, 18vw, 210px);
+  height: auto;
   flex: 0 0 auto;
 }
 
 .hero-seal {
   width: 100%;
-  height: 100%;
+  height: auto;
   display: block;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 16px 30px rgba(96, 40, 61, 0.16);
 }
 
 .section {

@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
-import brandSeal from '@/assets/logo/cabeleleila-mark-light.svg'
+import brandSeal from '@/assets/logo/cabeleleila-leila-logo-vetorizada.svg'
 import AppLayout from '@/components/AppLayout/AppLayout.vue'
 
 const auth = useAuthStore()

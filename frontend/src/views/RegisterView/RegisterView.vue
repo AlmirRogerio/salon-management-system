@@ -48,7 +48,6 @@ async function onSubmit() {
 
 <template>
   <AuthLayout
-    title="Criar conta"
     subtitle="Cadastre-se para agendar seus serviços"
   >
     <form

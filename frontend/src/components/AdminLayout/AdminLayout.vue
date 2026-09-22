@@ -2,7 +2,6 @@
 import { computed } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
-import brandMark from '@/assets/logo/cabeleleila-mark-dark.svg'
 
 const router = useRouter()
 const auth = useAuthStore()
@@ -21,11 +20,6 @@ function onLogout() {
         to="/admin"
         class="brand"
       >
-        <img
-          class="brand-mark"
-          :src="brandMark"
-          alt=""
-        >
         <span>
           <strong>Cabeleleila</strong>
           <small>Gestão do salão</small>

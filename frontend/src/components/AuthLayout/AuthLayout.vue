@@ -1,8 +1,8 @@
 <script setup>
-import brandMark from '@/assets/logo/cabeleleila-mark-light.svg'
+import brandLogo from '@/assets/logo/cabeleleila-leila-logo-vetorizada.svg'
 
 defineProps({
-  title: { type: String, required: true },
+  title: { type: String, default: '' },
   subtitle: { type: String, default: '' },
 })
 </script>
@@ -12,15 +12,15 @@ defineProps({
     <div class="auth-card">
       <header class="auth-header">
         <img
-          class="auth-mark"
-          :src="brandMark"
+          class="auth-logo"
+          :src="brandLogo"
           alt="Cabeleleila Leila — Salão de Beleza"
         >
-        <p class="brand-name">
-          <span>Cabeleleila</span>
-          <strong>Leila</strong>
-        </p>
-        <h2>{{ title }}</h2>
+        <h2
+          v-if="title"
+        >
+          {{ title }}
+        </h2>
         <p
           v-if="subtitle"
           class="subtitle"
