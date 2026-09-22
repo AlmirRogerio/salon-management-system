@@ -44,6 +44,10 @@ function onLogout() {
           <span class="nav-icon">◔</span>
           Agendamentos
         </RouterLink>
+        <RouterLink to="/admin/customers">
+          <span class="nav-icon">◑</span>
+          Clientes
+        </RouterLink>
         <RouterLink to="/admin/services">
           <span class="nav-icon">✦</span>
           Serviços

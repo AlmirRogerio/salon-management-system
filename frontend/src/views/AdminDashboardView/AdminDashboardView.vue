@@ -39,6 +39,20 @@ import AdminLayout from '@/components/AdminLayout/AdminLayout.vue'
       </article>
 
       <article class="action-card">
+        <span class="action-icon">◑</span>
+        <div>
+          <p class="action-label">
+            Relacionamento
+          </p>
+          <h2>Clientes</h2>
+          <p>Consulte os clientes cadastrados e o histórico de agendamentos.</p>
+        </div>
+        <RouterLink to="/admin/customers">
+          Ver clientes
+        </RouterLink>
+      </article>
+
+      <article class="action-card">
         <span class="action-icon">✦</span>
         <div>
           <p class="action-label">

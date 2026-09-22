@@ -61,6 +61,12 @@ const routes = [
     meta: { requiresAuth: true, requiresAdmin: true },
   },
   {
+    path: '/admin/customers',
+    name: 'admin-customers',
+    component: () => import('@/views/AdminCustomersView/AdminCustomersView.vue'),
+    meta: { requiresAuth: true, requiresAdmin: true },
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
     component: () => import('@/views/NotFoundView/NotFoundView.vue'),
